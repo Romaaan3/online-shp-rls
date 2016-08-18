@@ -1,0 +1,45 @@
+h1 Бренды
+
+table.table
+  thead
+    tr
+      th ID
+      th название
+      th colspan="3"
+
+  tbody
+    - @brands.each do |brand|
+
+      tr
+        td = brand.id
+        td = brand.name
+        td = link_to 'просмотр', cp_brand_path(brand)
+        td = link_to 'редактирование', edit_cp_brand_path(brand)
+        td
+          - unless brand.parts.any?
+            = link_to 'удалить', cp_brand_path(brand), method: :delete, data: { confirm: 'Вы уверены?' }, class: "text-danger"
+          - else
+            span.text-muted
+              | нельзя удалить - есть товары (#{brand.parts.count})
+br
+
+= link_to 'Создать +', new_cp_brand_path, class: "btn btn-lg btn-success"
+hr
+.row
+  .col-sm-5
+    .panel.panel-default
+      .panel-heading
+        | Управление брендами через CSV-файл
+      .panel-body
+        p
+          / =link_to 'Скачать все товары CSV', cms_products_path(format: "csv")
+          = link_to 'Скачать все бренды CSV', cp_brands_path(format: "csv")
+          / span.pull-right =link_to 'бланк CSV', p_csv_blank_path(format: "csv")
+          span.pull-right
+            = link_to 'бланк CSV', blank_cp_brands_path(format: "csv")
+        hr
+        = form_tag import_cp_brands_path, multipart: true do
+          p = file_field_tag :file, required: true
+          p = submit_tag "Обновить бренды на сайте из CSV-файла", class: "btn btn-default"
+
+

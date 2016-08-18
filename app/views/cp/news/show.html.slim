@@ -1,0 +1,18 @@
+h1  Просмотр новости
+hr
+
+h2 = @news.name
+.row style="margin-bottom: 20px"
+	.col-md-2
+		= image_tag @news.image.url(:thumb), class: "img-rounded"
+	.col-md-10
+		p
+			p.text-muted Опубликовано #{@news.created_at.strftime("%d %b %Y (%H:%M)")}
+			em = @news.anons
+
+= raw @news.text
+
+hr
+= link_to 'редактировать', edit_cp_news_path(@news)
+'|
+= link_to 'назад', cp_news_index_path

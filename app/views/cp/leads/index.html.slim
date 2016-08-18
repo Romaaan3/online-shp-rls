@@ -1,0 +1,19 @@
+h1 Просмотр оставленных заявок на звонок
+table.table
+  thead
+    tr
+      th ID
+      th время поступления
+      th имя
+      th телефон
+      th
+
+  tbody
+    - @cp_leads.each do |cp_lead|
+      tr
+        td = cp_lead.id
+        td = cp_lead.created_at.to_formatted_s(:short)  
+        td = cp_lead.name
+        td = cp_lead.tel
+        td = link_to 'удалить', cp_lead_path(cp_lead), data: {:confirm => 'Действие нельзя отменить, вы уверены?'}, :method => :delete, class: "text-danger"
+= will_paginate @cp_leads, renderer: BootstrapPagination::Rails 

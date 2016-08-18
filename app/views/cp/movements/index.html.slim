@@ -1,0 +1,36 @@
+h1 Перемещения
+
+table.table
+  thead
+    tr
+      th ID
+      th дата
+      th от куда
+      th куда
+      / th наименований
+      / th шт
+      th
+      th
+
+  tbody
+    - @movements.each do |movement|
+      tr class="#{movement.complete? ? "success" : ""}"
+        td = movement.id
+        td = movement.updated_at.to_formatted_s(:short)
+        td 
+          - if movement.from_store
+            = movement.from_store.name 
+        td 
+          -if movement.to_store
+            = movement.to_store.name
+        / td -
+        / td -
+        td = link_to 'просмотр', cp_movement_path(movement)
+        - unless movement.complete? 
+          td = link_to 'удалить', cp_movement_path(movement), data: {:confirm => 'Перемещение будет отменено и удалено навсегда, продолжить?'}, :method => :delete, class: "text-danger"
+        - else
+          td нельзя удалить
+
+br
+
+= link_to 'Создать +', new_cp_movement_path, class: "btn btn-lg btn-success"

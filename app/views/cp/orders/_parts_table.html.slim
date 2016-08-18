@@ -1,0 +1,52 @@
+- if parts.any?
+  table.table
+    thead
+      tr
+        th ID
+        th бренд
+        th категория
+        th название
+        th width="70px" цена
+        th width="50px"
+          | шт
+        th width="150px"
+    tbody
+      - @parts.each do |part|
+        - if @order.from_store.name == "Интернет-магазин"
+          tr
+            td = part.id
+            td = part.brand.name
+            td = part.category.name
+            td = part.name
+            td = part.cost_1
+            td = @order.from_store.existences.find_by_part_id(part.id).q
+
+            td
+              = form_for [:cp, OrderLineitem.new], remote: true, html: { class: 'form-inline' } do |f|
+                = f.hidden_field :part_id, value: part.id
+                = f.hidden_field :order_id, value: @order.id
+                .input-group
+                  = f.number_field :q, class: "form-control input-sm", min: 1, value: 1
+                  span.input-group-btn
+                    = f.submit "добавить", class: "btn btn-default btn-sm", data: { disable_with: '...' }
+        - else
+          - if part.cost_1 > 0 && @order.from_store.existences.find_by_part_id(part.id).q > 0
+            tr
+              td = part.id
+              td = part.brand.name
+              td = part.category.name
+              td = part.name
+              td = part.cost_1
+              td = @order.from_store.existences.find_by_part_id(part.id).q
+
+              td
+                = form_for [:cp, OrderLineitem.new], remote: true, html: { class: 'form-inline' } do |f|
+                  = f.hidden_field :part_id, value: part.id
+                  = f.hidden_field :order_id, value: @order.id
+                  .input-group
+                    = f.number_field :q, class: "form-control input-sm", min: 1, value: 1, max: @order.from_store.existences.find_by_part_id(part.id).q
+                    span.input-group-btn
+                      = f.submit "добавить", class: "btn btn-default btn-sm", data: { disable_with: '...' }
+-else
+  .well
+    h1 не найдено ни одной запчасти

@@ -1,0 +1,2 @@
+module Cp::MovementLineitemsHelper
+end

@@ -1,0 +1,35 @@
+h1 Перемещение ##{@movement.id}
+.row
+  .col-sm-8
+    p.small
+      span> От куда:
+      - if @movement.from_store
+    	  = @movement.from_store.name
+      br
+      span> Куда:
+      - if @movement.to_store
+    	  = @movement.to_store.name
+      br
+      span> Описание:
+      = @movement.description
+  .col-sm-4
+    = simple_form_for [:cp, @movement], :url => complete_cp_movement_path(@movement), method: :get do |f|
+      - unless @movement.complete? 
+        = f.hidden_field :complete, value: true
+        = f.button :submit, "провести"
+      -else
+        = f.hidden_field :complete, value: false
+        = f.button :submit, "отменить"
+
+#lineitems
+  = render 'lineitems_table', lineitems: @movement.lineitems
+
+- unless @movement.complete?
+  hr
+  = render 'parts_table'
+
+hr
+- unless @movement.complete?
+  = link_to 'Редактирование', edit_cp_movement_path(@movement)
+  span<> |
+= link_to 'Назад', cp_movements_path

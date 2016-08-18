@@ -1,0 +1,37 @@
+h1 Просмотр запчасти
+
+- @part.pictures.each do |pic|
+  = image_tag pic.file.url(:thumb), class: "img-rounded"
+  
+p
+  strong Название:
+  = @part.name
+p
+  strong Описание:
+  = @part.description
+p
+  strong Цена 1:
+  = @part.cost_1
+p
+  strong Цена 2:
+  = @part.cost_2
+p
+  strong Бренд:
+  = @part.brand.name if @part.brand
+p
+  strong Категория:
+  = @part.category.name if @part.category
+
+hr
+.well
+  h3 наличие
+  - @part.existences.each do |e|
+    p #{e.store.name}: #{e.q}
+
+.btn-group role="group"
+  = link_to 'Назад', cp_parts_path, class: "btn btn-default"
+  = link_to 'Редактирование', edit_cp_part_path(@part), class: "btn btn-success"
+hr
+= link_to 'Удалить навсегда запчасть', cp_part_path(@part), method: :delete, data: { confirm: 'Вы уверены?' }, class: "btn btn-danger"
+
+

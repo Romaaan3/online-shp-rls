@@ -1,0 +1,6 @@
+.col-sm-12.col-md-4
+	= simple_form_for [:cp, @store], html: { class: 'form-horizontal' } do |f|
+	  = f.input :name, label: 'Название', error: 'Название должно быть уникальным и не может быть пустым'
+
+	  = f.button :submit
+

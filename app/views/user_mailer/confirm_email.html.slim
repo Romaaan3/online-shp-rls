@@ -1,0 +1,13 @@
+p Здравствуйте, заказ на сумму #{number_to_currency(@order.full_cost * @rate, precision: 0)} принят
+
+p
+  | Данные для входа на сайт #{link_to "swap.com.by", new_user_session_url}
+  br
+  | Логин: #{@order.email}
+  br
+  | Пароль: #{@pass}
+
+
+
+
+

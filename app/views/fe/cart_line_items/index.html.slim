@@ -1,0 +1,25 @@
+h1 Listing fe_cart_line_items
+
+table
+  thead
+    tr
+      th Part
+      th Cart
+      th Q
+      th
+      th
+      th
+
+  tbody
+    - @fe_cart_line_items.each do |fe_cart_line_item|
+      tr
+        td = fe_cart_line_item.part
+        td = fe_cart_line_item.cart
+        td = fe_cart_line_item.q
+        td = link_to 'Show', fe_cart_line_item
+        td = link_to 'Edit', edit_fe_cart_line_item_path(fe_cart_line_item)
+        td = link_to 'Destroy', fe_cart_line_item, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Cart line item', new_fe_cart_line_item_path

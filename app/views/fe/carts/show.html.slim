@@ -1,0 +1,128 @@
+.main-section
+  .container
+    .row
+      .col-xs-12.col-sm-12.col-md-12.col-lg-12
+
+    .row
+      .col-xs-12.col-sm-12.col-md-12.col-lg-12
+        ul.cart-menu
+          li.active
+            | Товары в корзине
+          - unless @cart.cart_line_items.empty?
+            li
+              = link_to "Оформление заказа", fe_cart_checkout_url
+          - else
+            li
+              a href="#" Оформление заказа
+
+    .row
+      .col-xs-12.col-sm-12.col-md-9.col-lg-9
+        .cart-table
+          table.cart-prod-table
+            = render 'line_items_table'
+
+      .col-xs-12.col-sm-12.col-md-3.col-lg-3
+        form.place_order action="" method="post" name="place_order"
+          h2 итого:
+          span.total-price
+            span.tp = number_to_currency(@cart.total_price*@rate.rate_of_exchange, precision: 0)
+
+          br/
+          i.fa.fa-exclamation-triangle aria-hidden="true"
+          br/
+          span Внимание!
+          br/
+          span.min-cost
+            | проверяйте заказ перед оформлением
+          button.order
+          = link_to "Оформить заказ", fe_cart_checkout_url, class: "center-block product_order_btn"
+  / .similar-prod.interesting-prod
+  /   .container
+  /     .wrap-owl-carousel
+  /       .row
+  /         .col-xs-12.col-sm-12.col-md-12.col-lg-12
+  /           h2
+  /             a href=""  Будет интересно
+  /       .row
+  /         .col-xs-12.col-sm-12.col-md-12.col-lg-12
+  /           .owl-carousel.owl-theme.owl-responsive-1000.owl-loaded
+  /             .item
+  /               .product
+  /                 a href="#" title="Подробнее"
+  /                 .new-prod Новинка
+  /                 .prod-img
+  /                   img src="image/m3fDef4L9kQ.jpg" /
+  /                 p.description
+  /                   span Клейкая лента для дисплея Samsung SM-G870F Galaxy S5 Active (оригинал)
+  /                 span.old-price
+  /                   span 1 076 930
+  /                   span Br
+  /                 span.new-price
+  /                   span 1 076 930
+  /                   span Br
+  /             .item
+  /               .product
+  /                 a href="#" title="Подробнее"
+  /                 .discount-prod Скидка
+  /                 .prod-img
+  /                   img src="image/m3fDef4L9kQ.jpg" /
+  /                 p.description
+  /                   span Клейкая лента для дисплея Samsung SM-G870F Galaxy S5 Active (оригинал)
+  /                 span.old-price
+  /                   span 1 076 930
+  /                   span Br
+  /                 span.new-price
+  /                   span 1 076 930
+  /                   span Br
+  /             .item
+  /               .product
+  /                 a href="#" title="Подробнее"
+  /                 .prod-img
+  /                   img src="image/m3fDef4L9kQ.jpg" /
+  /                 p.description
+  /                   span Клейкая лента для дисплея Samsung SM-G870F Galaxy S5 Active (оригинал)
+  /                 span.old-price
+  /                   span 1 076 930
+  /                   span Br
+  /                 span.new-price
+  /                   span 1 076 930
+  /                   span Br
+  /             .item
+  /               .product
+  /                 a href="#" title="Подробнее"
+  /                 .prod-img
+  /                   img src="image/m3fDef4L9kQ.jpg" /
+  /                 p.description
+  /                   span Клейкая лента для дисплея Samsung SM-G870F Galaxy S5 Active (оригинал)
+  /                 span.old-price
+  /                   span 1 076 930
+  /                   span Br
+  /                 span.new-price
+  /                   span 1 076 930
+  /                   span Br
+  /             .item
+  /               .product
+  /                 a href="#" title="Подробнее"
+  /                 .prod-img
+  /                   img src="image/m3fDef4L9kQ.jpg" /
+  /                 p.description
+  /                   span Клейкая лента для дисплея Samsung SM-G870F Galaxy S5 Active (оригинал)
+  /                 span.old-price
+  /                   span 1 076 930
+  /                   span Br
+  /                 span.new-price
+  /                   span 1 076 930
+  /                   span Br
+  /             .item
+  /               .product
+  /                 a href="#" title="Подробнее"
+  /                 .prod-img
+  /                   img src="image/m3fDef4L9kQ.jpg" /
+  /                 p.description
+  /                   span Клейкая лента для дисплея Samsung SM-G870F Galaxy S5 Active (оригинал)
+  /                 span.old-price
+  /                   span 1 076 930
+  /                   span Br
+  /                 span.new-price
+  /                   span 1 076 930
+  /                   span Br

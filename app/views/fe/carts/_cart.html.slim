@@ -1,0 +1,12 @@
+div
+  = link_to fe_current_profile_url, class: "profile" do
+    i.fa.fa-user.fa-2x aria-hidden="true"
+    span Профиль
+  .picter-cart
+    = link_to fe_current_cart_url do
+      i.fa.fa-shopping-cart.fa-2x aria-hidden="true"
+      span#value = @cart.total_quantity
+      span#purse = number_to_currency(@cart.total_price*@rate.rate_of_exchange, precision: 0)
+
+
+

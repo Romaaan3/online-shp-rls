@@ -1,0 +1,15 @@
+/ h1.cover-heading Скоро открытие онлайн-сервиса
+/ p.lead узнать о наличии и цене запчастей для мобильных устройств вы можете по телефону: 375 29 6122130
+/ .row
+/   .col-lg-12
+/   	= form_for [:fe, @email], html: { class: "form-inline" } do |f|
+/ 			.form-group
+/ 		    .input-group
+/ 		    	= f.email_field :email, placeholder: "example@tut.by", class: "form-control", required: true
+/ 		    	span.input-group-btn
+/ 		    		= f.submit "отправить", class: "btn btn-default"
+
+/ p.small Об открытии сервиса Вы узнаете одним из первых
+- if @block_1 
+	article.mainpage_content
+		= raw @block_1.text

@@ -1,0 +1,23 @@
+h1 Новости
+
+table.table
+  thead
+    tr
+      th ID
+      th наздвание
+      th анонс
+      th
+      th
+
+  tbody
+    - @news.each do |news|
+      tr
+        td = news.id
+        td = link_to news.name, cp_news_path(news)
+        td = truncate(news.anons, length: 40)
+        td = link_to 'редактировать', edit_cp_news_path(news)
+        td = link_to 'удалить', cp_news_path(news), data: {:confirm => 'Вы уверены?'}, :method => :delete, class: "text-danger"
+
+br
+
+= link_to 'Создать', new_cp_news_path, class: "btn btn-default"

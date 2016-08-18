@@ -1,0 +1,22 @@
+
+.container
+  .row
+    .col-xs-12.col-sm-3.col-md-4.col-lg-3
+      = render 'layouts/left_catalog_menu'
+
+    .col-xs-12.col-sm-9.col-md-8.col-lg-9
+    	section
+				h1 Новости
+				- unless @news.blank?
+					- @news.each do |one|
+						hr
+						article
+							h2 = link_to one.name, fe_news_path(one)
+							p = one.anons
+							footer
+								span.small.text-muted = l one.created_at, format: :long
+					= will_paginate @news, renderer: BootstrapPagination::Rails 
+				- else 
+					hr
+					p.text-muted Ни одной новости не опубликовано.
+				

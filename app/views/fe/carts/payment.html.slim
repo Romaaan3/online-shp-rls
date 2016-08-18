@@ -1,0 +1,17 @@
+.container
+  h1 Заказ номер ##{@order.id}
+  p.lead
+    | Сумма заказа:
+    strong< =number_to_currency @order.full_cost*@rate.rate_of_exchange, precision: 0
+
+  p Ваш заказ зарегистрирован в системе
+  -if @order.tip_oplaty == "karta"
+    = simple_form_for [:fe, @order], :url => "https://test.paysec.by/pay/order.cfm", :method => :post do |f|
+      = f.hidden_field :Merchant_ID, :name => "Merchant_ID", :value => "469472"
+      = f.hidden_field :OrderNumber, :name => "OrderNumber", :value => @order.id
+      = f.hidden_field :OrderAmount, :name => "OrderAmount", :value => @order.full_cost*@rate.rate_of_exchange
+      = f.hidden_field :OrderComment, :name => "OrderComment", :value => "karta"
+      = f.submit "Оплатить", class: "btn btn-success btn-lg"
+  -else
+    p Спасибо за покупку, с Вами свяжутся!
+

@@ -1,0 +1,3 @@
+module Cp::MovementsHelper
+
+end

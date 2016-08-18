@@ -1,0 +1,15 @@
+
+.row
+  .col-sm-12.col-md-4
+    = simple_form_for [:cp, @order] do |f|
+      = f.error_notification
+
+      = f.association :client, collection: Role.find_by_name(:client).users, label_method: :email, label: "Выберите клиента", prompt: "Выберите клиента"
+      = f.association :from_store, label: "Выберите склад для списания товара", error: 'Обязательно укажите с какого склада будет списание проданого товара.', include_blank: false
+
+      = f.button :submit
+- if @order.errors.any?
+  #error_explanation
+    ul
+    - @order.errors.full_messages.each do |msg|
+      li= msg

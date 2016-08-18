@@ -1,0 +1,15 @@
+nav.sidebar-nav
+  .menu-trigger
+    span Каталог
+  nav#slide-menu
+    ul#ul-slide-menu
+      - @brands.each do |brand|
+        li
+          = link_to fe_catalog_index_path(brand: brand) do
+            = brand.name
+            span.glyphicon.glyphicon-triangle-bottom
+          ul
+            - @categories.each do |category|
+              - ps = category.parts.where(brand: brand).size
+              - if ps > 0
+                li = link_to "#{category.name} (#{ps})", fe_catalog_index_path(brand: brand, category: category)

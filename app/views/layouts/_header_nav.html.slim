@@ -1,0 +1,34 @@
+.navbar.navbar-inverse.navbar-fixed-top role="navigation" 
+  .container-fluid
+    .navbar-header
+      button.navbar-toggle data-target=".navbar-collapse" data-toggle="collapse" type="button" 
+        span.sr-only показать/скрыть навигацию
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      =link_to "SWAP", cp_root_path, class: "navbar-brand"
+    - if !user_signed_in?
+      =link_to "войти", new_user_session_path, class: "btn btn-default navbar-btn"
+    -else
+    .navbar-collapse.collapse
+      ul.nav.navbar-nav.navbar-right
+        li
+          = link_to 'сайт', fe_root_url, id: "site_btn"
+        li
+          = link_to 'новый заказ', new_cp_order_path, id: "new_order_header_btn"
+        li.dropdown
+          a.dropdown-toggle> aria-expanded="false" data-toggle="dropdown" href="#" role="button" class="uncc_#{current_user.role.name}" style="font-weight: 700;"
+            = current_user.email
+            span.glyphicon.glyphicon-chevron-down<
+          ul.dropdown-menu role="menu" 
+            / li
+            /   a href="#"  Action
+            / li
+            /   a href="#"  Another action
+            / li
+            /   a href="#"  Something else here
+            / li.divider
+            li
+              =link_to destroy_user_session_path, :method => :delete do
+                span.glyphicon.glyphicon-off.pull-right
+                | выйти

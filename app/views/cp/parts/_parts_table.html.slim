@@ -1,0 +1,44 @@
+- if parts.any?
+  table.table.small
+    thead
+      tr
+        / th = sort_link(q, :id, "ID")
+        / th = sort_link(q, :brand, "бренд")
+        / th = sort_link(q, :category, "категория")
+        / th = sort_link(q, :name, "название")
+        / th = sort_link(q, :cost_1, "цена")
+        / - if current_user.root?
+        /   th = sort_link(q, :cost_2, "цена 2")
+        / - Store.all.each do |store|
+        /   th = store.name
+        / th наличие
+        th ID
+        th бренд
+        th категория
+        th название
+        th цена
+        - if current_user.root?
+          th цена 2
+        - Store.all.each do |store|
+          th = store.name
+        th наличие
+    tbody
+      - parts.each do |part|
+        tr
+          td = part.id
+          td = part.brand.name
+          td = part.category.name
+          td = link_to part.name, cp_part_path(part)
+          td = part.cost_1
+          - if current_user.root?
+            td = part.cost_2
+          - part_total_existence = 0
+          - part.existences.order(:store_id).each do |e|
+            td #{e.q}
+            - part_total_existence += e.q
+          td = part_total_existence
+  = will_paginate parts, renderer: BootstrapPagination::Rails 
+
+- else
+  .well
+    h1 не найдено ни одной запчасти

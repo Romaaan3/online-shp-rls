@@ -1,0 +1,23 @@
+tr id=="cli_#{line_item.id}"
+  td
+    .wrap-img-sm
+      - if line_item.part.pictures.first
+        = image_tag line_item.part.pictures.first.file.url(:cart_thumb)
+      - else
+        = image_tag('60x60.png')
+
+    h2 = line_item.part.name
+    = link_to line_item.part.category.name, fe_catalog_index_path(brand: line_item.part.brand, category: line_item.part.category), class: "name-prod"
+  td
+    span.new-price
+      span = number_to_currency(line_item.price*@rate.rate_of_exchange, precision: 0)
+  td
+    = link_to "-", decrement_fe_cart_line_item_url(line_item), method: :put, class: "minus", remote: true
+    span.count-prod contenteditable="false" = line_item.q
+    = link_to "+", increment_fe_cart_line_item_url(line_item), method: :put, class: "plus", remote: true
+  td
+    span.total-price
+      span = number_to_currency(line_item.total_price*@rate.rate_of_exchange, precision: 0)
+  td
+    = link_to fe_cart_line_item_path(line_item), class: "close_for_katya", method: :delete, data: { confirm: 'Вы уверены?' }, remote: true do
+      i.fa.fa-times aria-hidden="true"

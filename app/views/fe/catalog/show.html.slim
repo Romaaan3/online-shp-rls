@@ -1,0 +1,58 @@
+.container
+  .row
+    .describe-prod
+      .col-xs-12.col-sm-6.col-md-7.col-lg-5
+        .gallery
+          .row
+            .col-lg-12
+              .big-wrap-img
+                - unless @part.pictures.blank?
+                  = image_tag @part.pictures.first.file.url(:medium), alt: "#{@part.name} (460x380)"
+                - else
+                  = image_tag '460x380.png'
+
+          - unless @part.pictures.blank?
+            .row
+              - @part.pictures.each do |picture|
+                - if picture.id != @part.pictures.first.id
+                  .col-xs-6.col-sm-3.col-md-3.col-lg-3
+                    .wrap-img
+                      = image_tag @part.pictures.first.file.url(:thumb), alt: "#{@part.name} (90x80)"
+
+      .col-xs-12.col-sm-6.col-md-7.col-lg-7
+        h1 = @part.name
+        = link_to "#{@part.brand.name}/#{@part.category.name}", fe_catalog_index_path(@part.brand, @part.category), class: "name-prod"
+        br
+        / span.old-price
+        /   span 1 076 930
+        /   span Br
+        span.new-price
+          span = number_to_currency( @part.cost_1*20000, precision: 0)
+        = button_to 'Добавить в корзину', fe_cart_line_items_url(part_id: @part.id), remote: true, class: "product_order_btn"
+        .about-prod
+          span о товаре:
+          p = @part.description.blank? ? "информации нет" : @part.description
+
+/ aside.similar-prod
+/   .container
+/     .wrap-owl-carousel
+/       .row
+/         .col-xs-12.col-sm-12.col-md-12.col-lg-12
+/           h2 Похожие товары
+/       .row
+/         .col-xs-12.col-sm-12.col-md-12.col-lg-12
+/           .owl-carousel.owl-theme.owl-responsive-1000.owl-loaded
+/             - @part.simular(5).each do |part|
+/               .item
+/                 .product
+/                   a href="#" title="Подробнее"
+/                   .prod-img
+/                     - unless part.pictures.blank?
+/                       = image_tag part.pictures.first.file.url(:preview)
+/                     - else
+/                       = image_tag '260x300.png', alt: "#{part.name} (260x300)"
+/                   p.description
+/                     span = link_to part.name, fe_catalog_part_path(part.brand, part.category, part)
+/                   span.new-price
+/                     span = number_with_delimiter( (part.cost_1*20000).to_i )
+/                     span< BYR

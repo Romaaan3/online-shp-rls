@@ -1,0 +1,9 @@
+h1  Просмотр блока
+hr
+
+h2 = @block.name
+div.well = raw @block.text
+
+= link_to 'редактировать', edit_cp_block_path(@block)
+'|
+= link_to 'назад', cp_blocks_path

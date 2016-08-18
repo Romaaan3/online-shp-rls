@@ -1,0 +1,34 @@
+tr
+
+  td = part.id
+  td = part.brand.name
+  td = part.category.name
+  td = part.name
+
+  - q_max_value = 100000
+  - if @movement.from_store
+    td = @movement.from_store.existences.find_by_part_id(part.id).q
+    - q_max_value = @movement.from_store.existences.find_by_part_id(part.id).q
+  - else
+    - part_total_existence = 0
+    - part.existences.order(:store_id).each do |e|
+      - part_total_existence += e.q
+    td = part_total_existence
+  td 
+    - if @movement.from_store
+      - if @movement.from_store.existences.find_by_part_id(part.id).q > 0
+        = form_for [:cp, MovementLineitem.new], remote: true, html: { class: 'form-inline' } do |f|
+          = f.hidden_field :part_id, value: part.id
+          = f.hidden_field :movement_id, value: @movement.id
+          .input-group
+            = f.number_field :q, class: "form-control input-sm", min: 1, value: 1, max: q_max_value
+            span.input-group-btn
+              = f.submit "добавить", class: "btn btn-default btn-sm", data: { disable_with: '...' }
+    - else
+      = form_for [:cp, MovementLineitem.new], remote: true, html: { class: 'form-inline' } do |f|
+        = f.hidden_field :part_id, value: part.id
+        = f.hidden_field :movement_id, value: @movement.id
+        .input-group
+          = f.number_field :q, class: "form-control input-sm", min: 1, value: 1, max: q_max_value
+          span.input-group-btn
+            = f.submit "добавить", class: "btn btn-default btn-sm", data: { disable_with: '...' }

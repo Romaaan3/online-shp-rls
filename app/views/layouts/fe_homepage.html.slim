@@ -1,0 +1,183 @@
+doctype html
+html lang="ru"
+  head
+    meta charset="utf-8"
+    title = show_title(@block_1)
+    meta content== show_description(@block_1) name="description"
+    - unless @block_1.keywords.blank?
+      meta content== @block_1.keywords name="keywords"
+    meta name="robots" content="index, follow"
+    meta content="IE=edge" http-equiv="X-UA-Compatible"
+    meta content="width=device-width, initial-scale=1" name="viewport"
+    meta content="INTELLECT-IT Minsk www.intellectit.by" name="author"
+
+    = stylesheet_link_tag    "homepage", media: 'all', 'data-turbolinks-track' => true
+
+    /![if lt IE 9]><script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script><![endif]
+    /![if lt IE 9]><script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script><![endif]
+
+    = csrf_meta_tags
+    = action_cable_meta_tag
+
+  body
+    header#top-header
+      #info_block
+        -if notice
+          .alert.alert-info
+            = notice
+            button.close type="button" data-dismiss="alert" aria-label="Close"
+              span aria-hidden="true" &times;
+        -if alert
+          .alert.alert-warning
+            = alert
+            button.close type="button" data-dismiss="alert" aria-label="Close"
+              span aria-hidden="true" &times;
+      .bg-top-menu
+        .container
+          .row
+            .col-xs-3.col-sm-2.col-md-3.col-lg-2.text-left
+              = link_to "SWAP", fe_root_url, id: "logo", title: "Главная страница"
+            .col-xs-4.col-sm-8.col-md-7.col-lg-8
+              nav#top-nav.navbar.navbar-default
+                .navbar-header
+                  button.navbar-toggle.collapsed aria-expanded="false" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button"
+                    span.sr-only Toggle navigation
+                    span.icon-bar
+                    span.icon-bar
+                    span.icon-bar
+                #bs-example-navbar-collapse-1.collapse.navbar-collapse
+                  ul.nav.navbar-nav
+                    li
+                      a href="/katalog"
+                        | Каталог
+                        span.sr-only (current)
+                    li
+                      a href="/dostavka-i-oplata"  Доставка и оплата
+                    li
+                      a href="/novosti"  Новости
+                    li
+                      a href="/kontakty"  Контакты
+            .col-xs-5.col-sm-2.col-md-2.col-lg-2.text-right
+              #cart-profile.right-block
+                button.block-phone data-target="#get_lead" data-toggle="modal" type="button"
+                  i.fa.fa-phone-square.fa-2x
+                == render "layouts/zayavka_modal"
+
+                .picter-cart
+                  = link_to fe_current_cart_path do
+                    img alt="icon-trolley" src="#{asset_path('cart.png')}"
+                    span#value = @cart.total_quantity
+                div
+                  = link_to fe_current_profile_url, class: "profile" do
+                    img src="#{asset_path('profile.png')}"
+      - if @parts.blank?
+        .container#top_content
+          .bg-img-main
+            .row
+              .col-xs-6.col-sm-6.col-md-6.col-lg-6
+                img alt="Запчасти для мобильных устройств и планшетов" src="#{asset_path('remont-telefonov-tomsk(1).png')}"
+              .col-xs-12.col-sm-6.col-md-6.col-lg-6
+                h1 Запчасти для мобильных устройств и планшетов
+                h2 Продажа и замена запчастей за умеренные деньги!
+                = link_to "Перейти в каталог", fe_catalog_index_path, class: "btn center-block main-btn"
+      .bg-main-search
+        .container
+          .row
+            .col-xs-12.col-sm-12.col-md-12.col-lg-12
+              = search_form_for @q, url: fe_root_path, class: "row", html: {autocomplete: "off", class: "search"}, remote: true do |f|
+                  .input-group
+                    = f.search_field :name_or_brand_name_or_category_name_cont, class: "form-control", autofocus: true, placeholder: "Название запчасти"
+                    span.input-group-btn
+                      = button_tag type: 'submit', class: "btn btn-search" do
+                        span.glyphicon.glyphicon-search>
+                        | Начать поиск!
+
+    section#main-section
+      .container
+        #parts
+          = render 'parts_table', parts: @parts, q: @q
+
+      .container
+        .row
+          .col-xs-12.col-sm-6.col-md-4.col-lg-4
+            .block.block-1
+              div
+                span 3 000
+                br
+                span наименований
+              div
+                span 12
+                br
+                span категорий
+              = link_to "В каталог", fe_catalog_index_path, class: "btn center-block"
+
+          .col-xs-12.col-sm-6.col-md-4.col-lg-4
+            .block.block-2
+              - if @novost
+                .bg-opasity
+                  .discount
+                    / span#discount-value.discount-value> -20
+                    / | %
+                    / br
+                    span#discount-name.discount-name = @novost.name
+                    br
+                    = link_to "Подробнее", fe_news_path(@novost), class: "btn center-block"
+          .col-xs-12.col-sm-6.col-md-4.col-lg-4
+            .block.block-3
+              .social.social-fb
+                a href="https://www.facebook.com/intellectit.minsk" title=("Мы на facebook.com")
+                  i.fa.fa-facebook.fa-2x
+              .social.social-vk
+                a href="https://vk.com/intellectit" title=("Мы ВКонтакте")
+                  i.fa.fa-vk.fa-2x
+              .social.social-tw
+                a href="https://twitter.com/IIT_Minsk" title=("Мы в твиттере")
+                  i.fa.fa-twitter.fa-2x
+              .social.social-g
+                a href="https://plus.google.com/+IntellectitBySS/posts" title=("Мы в Google Plus")
+                  i.fa.fa-google-plus.fa-2x
+          / .col-xs-12.col-sm-6.col-md-4.col-lg-4
+          /   .block.block-4
+          / .col-xs-12.col-sm-6.col-md-4.col-lg-4
+          /   .block.block-5
+          / .col-xs-12.col-sm-6.col-md-4.col-lg-4
+          /   .block.block-6
+          = yield
+    footer#bottom-footer
+      .bottom-footer
+        .container
+          .row
+            .col-xs-12.col-sm-5.col-md-3.col-lg-3
+              .text-left
+                span © SWAP.com.by Минск, #{Time.now.year}.
+            .col-xs-4.col-sm-3.col-md-2.col-lg-2
+              .social-footer
+                a href="https://vk.com/intellectit" title=("Мы ВКонтакте")
+                  i.fa.fa-vk
+                a href="https://www.facebook.com/intellectit.minsk" title=("Мы на facebook.com")
+                  i.fa.fa-facebook
+                a href="https://twitter.com/IIT_Minsk" title=("Мы в твиттере")
+                  i.fa.fa-twitter
+                a href="https://plus.google.com/+IntellectitBySS/posts" title=("Мы в Google Plus")
+                  i.fa.fa-google-plus
+            .col-xs-8.col-sm-4.col-md-2.col-lg-2
+              .phone.text-right
+                a href="tel:+375291889991" title="Позвонить"
+                  span +375 (29) 188-99-91
+            .col-xs-12.col-sm-4.col-md-3.col-lg-3
+              .adress
+                a href="/kontakty" title="Посмотреть на карте"
+                  span Минск, Волгоградская 17
+            .col-xs-12.col-sm-4.col-md-2.col-lg-2
+              .all-adress
+                span
+                  a href="https://www.intellectit.by" title="Веб-приложения для бизнеса"
+                    span style="font-size: 0.7em;" Разработчик: INTELLECT-IT
+
+
+
+    = javascript_include_tag "front_end", 'data-turbolinks-track' => true
+
+
+/ a> href="/" SWAP.com.by
+/   | - онлайн сервис по продаже запчастей для мобильных устройств. Минск, #{Time.now.year}.

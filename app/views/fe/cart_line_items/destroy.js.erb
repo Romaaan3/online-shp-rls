@@ -1,0 +1,3 @@
+$("#cart-profile").html("<%= escape_javascript render(@cart)%>");
+$(".cart-prod-table").html("<%= escape_javascript render('fe/carts/line_items_table') %>");
+$(".tp").text("<%= number_to_currency(@cart.total_price*20000, precision: 0)%>");

@@ -1,0 +1,44 @@
+doctype html
+html
+  head
+    title SWAP.com.by
+    meta name="viewport" content="width=device-width, initial-scale=1.0"
+    meta http-equiv="X-UA-Compatible" content="IE=edge"
+    meta name="robots" content="noindex, nofollow"
+
+    = stylesheet_link_tag    "application", media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag "application", 'data-turbolinks-track' => true
+
+    /![if lt IE 9]><script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script><![endif]
+    /![if lt IE 9]><script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script><![endif]
+
+    = csrf_meta_tags
+    = action_cable_meta_tag
+
+  body
+    = render 'layouts/header_nav'
+
+    .container-fluid
+      .row
+        .col-sm-3.col-md-2.sidebar
+          = render 'layouts/sidebar'
+
+        .col-sm-9.col-sm-offset-3.col-md-10.col-md-offset-2.main
+          #info_block
+            -if notice
+              .alert.alert-info
+                = notice
+                button.close type="button" data-dismiss="alert" aria-label="Close"
+                  span aria-hidden="true" &times;
+            -if alert
+              .alert.alert-warning
+                = alert
+                button.close type="button" data-dismiss="alert" aria-label="Close"
+                  span aria-hidden="true" &times;
+
+          = yield
+
+        footer.footer
+          .container-fluid
+            p.text-muted.copyright ® Веб-приложение для управления бизнесом SWAP.com.by / ©  Все права защищены. Минск, #{Time.now.year}.
+

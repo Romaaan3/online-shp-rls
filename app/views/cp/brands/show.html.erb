@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Название:</strong>
+  <%= @brand.name %>
+</p>
+<p>
+  <strong>Описание для SEO:</strong>
+  <%= @brand.description %>
+</p>
+<hr>
+<%= link_to 'редактировать', edit_cp_brand_path(@brand) %> |
+<%= link_to 'назад', cp_brands_path %>

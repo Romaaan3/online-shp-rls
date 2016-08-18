@@ -1,0 +1,42 @@
+h1 Запчасти
+= search_form_for @q, url: cp_parts_path, class: "row", html: {autocomplete: "off"}, remote: true do |f|
+  .col-lg-5
+    .input-group style="margin: 20px 0;"
+      = f.search_field :name_or_brand_name_or_category_name_cont, class: "form-control", autofocus: true
+      span.input-group-btn
+        = f.submit "найти!", class: "btn btn-default"
+#parts
+  = render 'parts_table', parts: @parts, q: @q
+
+br
+= link_to 'Создать +', new_cp_part_path, class: "btn btn-lg btn-success"
+hr
+.row
+  .col-sm-5
+    .panel.panel-default
+      .panel-heading
+        | Управление запчастями через CSV-файл
+      .panel-body
+        p
+          / =link_to 'Скачать все товары CSV', cms_products_path(format: "csv")
+          = link_to 'Скачать все запчасти CSV', cp_parts_path(format: "csv")
+          / span.pull-right =link_to 'бланк CSV', p_csv_blank_path(format: "csv")
+          span.pull-right
+            = link_to 'бланк CSV', blank_cp_parts_path(format: "csv")
+        p
+          = link_to 'Скачать все бренды CSV', cp_brands_path(format: "csv")
+        P
+          = link_to 'Скачать все категории CSV', cp_categories_path(format: "csv")
+
+
+        hr
+        = form_tag import_cp_parts_path, multipart: true do
+          p = file_field_tag :file, required: true
+          p = submit_tag "Обновить запчасти на сайте из CSV-файла", class: "btn btn-default"
+  .col-sm-5
+    p
+      h4 Инструкция по заполнению бланка:
+      p 1. Скачать бланк
+      p 2. Заполнить соответствующие поля, предварительно проверив существующие id категории и бренда
+
+

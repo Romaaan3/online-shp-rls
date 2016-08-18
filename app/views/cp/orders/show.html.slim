@@ -1,0 +1,45 @@
+.page-header.row
+	.col-sm-12.col-md-3
+		h1 Заказ ##{@order.id}
+	.col-sm-12.col-md-3 style="margin-top:20px;"
+		p.small
+			| Магазин: #{@order.from_store.name}
+			br
+			| Продавец: #{@order.seller.email}
+	.col-sm-12.col-md-3 style="margin-top:20px;"
+	.col-sm-12.col-md-3 style="margin-top:20px;"
+  	= simple_form_for [:cp, @order], :url => complete_cp_order_path(@order), method: :get do |f|
+      - unless @order.complete?
+        = f.hidden_field :complete, value: true
+        = f.button :submit, "провести"
+      -else
+        = f.hidden_field :complete, value: false
+        = f.button :submit, "отменить"
+    = simple_form_for [:cp, @order], :url => pay_order_cp_order_path(@order), method: :get do |f|
+      - unless @order.payd?
+        = f.hidden_field :complete, value: true
+        = f.button :submit, "оплатить заказ"
+      -else
+        = f.hidden_field :complete, value: false
+        = f.button :submit, "отменить оплату"
+
+
+#lineitems
+  = render 'lineitems_table', lineitems: @order.lineitems
+
+- unless @order.complete?
+  = search_form_for @q, url: cp_order_path, class: "row", html: {autocomplete: "off"}, remote: true do |f|
+    .col-lg-5
+      .input-group style="margin: 20px 0;"
+        = f.search_field :name_or_brand_name_or_category_name_cont, class: "form-control", autofocus: true
+        span.input-group-btn
+          = f.submit "найти!", class: "btn btn-default"
+#parts
+  = render 'cp/orders/parts_table', parts: @parts, q: @q
+
+
+/ hr
+/ - unless @order.complete?
+/   = link_to 'Редактирование', edit_cp_order_path(@order)
+/   span<> |
+= link_to 'Назад', cp_orders_path

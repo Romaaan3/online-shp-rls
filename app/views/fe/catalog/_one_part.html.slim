@@ -1,0 +1,21 @@
+.col-xs-12.col-sm-6.col-md-4.col-lg-4
+  .product
+    .prod-img
+      = link_to fe_catalog_part_path(part.brand, part.category, part) do
+        - unless part.pictures.blank?
+          = image_tag part.pictures.first.file.url(:preview)
+        - else
+          = image_tag '380x380.png', alt: "#{part.name} (380x380)"
+
+    p.description
+      span = link_to part.name, fe_catalog_part_path(part.brand, part.category, part)
+    / span.old-price
+    /   span 1 076 930
+    /   span Br
+    span.new-price
+      span = number_with_delimiter( (part.cost_1*20000).to_i )
+      span< BYR
+    .prod-btn
+      .order
+        = link_to "В корзину", fe_cart_line_items_path(part_id: part.id), class: "btn center-block addToCart", method: :post, remote:true
+

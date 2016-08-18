@@ -1,0 +1,2 @@
+	$('#top_content').slideUp("fast");
+	$("#parts").html("<%= j render(:partial => 'parts_table', :locals => { parts: @parts, q: @q } ) %>");

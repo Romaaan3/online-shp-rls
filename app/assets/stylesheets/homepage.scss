@@ -1,0 +1,525 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *
+ *= require nprogress
+ *= require nprogress-bootstrap
+ *
+ */
+
+$nprogress-color: white;
+
+@import "nprogress";
+@import "nprogress-bootstrap";
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "font-awesome";
+@import "fonts";
+@import "own_style";
+@import "modal_style";
+
+
+body {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	font-family: "GothamProRegular";
+	font-size: medium;
+	line-height: 1.333em;
+	text-align: center;
+}
+a,
+a:hover {
+	text-decoration: none;
+	color: #fff;
+}
+a:visited {
+	color: #fff;
+}
+/*HEADER*/
+#top-header {
+	position: relative;
+	display: block;
+	// min-height: 590px;
+	-webkit-background-size: cover;
+	   -moz-background-size: cover;
+	     -o-background-size: cover;
+			background-size: cover;
+	overflow: hidden;
+}
+.bg-opasity {
+    background: transparent;
+    -webkit-background-color:  rgba(0, 0, 0, 0.65);
+       -moz-background-color:  rgba(0, 0, 0, 0.65);
+        -ms-background-color:  rgba(0, 0, 0, 0.65);
+         -o-background-color:  rgba(0, 0, 0, 0.65);
+            background-color:  rgba(0, 0, 0, 0.65);
+    display: block;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+.bg-top-menu {
+	background-color: #333;
+}
+#logo,
+#cart-profile {
+	display: inline-block;
+	padding-top: 15px;
+}
+#cart-profile {
+	position: relative;
+	width: 125px;
+	height: 45px;
+}
+button.block-phone {
+	position: absolute;
+    top: 8px;
+    left: 0;
+    background-color: transparent;
+    color: #fff;
+    border: none;
+}
+button.block-phone:hover {
+    color: #908787;
+}
+.picter-cart a {
+	cursor: pointer;
+}
+.picter-cart img {
+	position: absolute;
+	top: 0;
+	left: 45px;
+}
+.picter-cart #value {
+	display: block;
+	position: absolute;
+	bottom: 20px;
+	left: 72px;
+	padding: 0 4px 0 4px;
+	background-color: #26c281;
+	border-radius: 20px;
+	font-size: 0.75em;
+	color: #fff;
+}
+.profile {
+	display: block;
+	position: absolute;
+	top: 0;
+	right: -15px;
+}
+#top-header .bg-img-main img {
+	margin-top: 35px;
+	margin-bottom: 35px;
+	width: 100%;
+	height: 385px;
+}
+#top-header .bg-img-main {
+	text-align: left;
+}
+#top-header .navbar {
+	margin-bottom: 0;
+}
+#top-header h1 {
+	margin-top: 15%;
+	margin-bottom: 35px;
+	color: #333;
+	text-transform: uppercase;
+	font-family: "GothamProMedium";
+	font-size: 2.25em;
+	line-height: 1.2em;
+}
+#top-header h2 {
+	width: 300px;
+    margin-top: 15px;
+    margin-bottom: 40px;
+    color: #333;
+    font-size: 1.25em;
+    line-height: 1.35em;
+}
+a.main-btn  {
+	color: #333;
+	border-color: #333;
+}
+a.main-btn:hover  {
+	color: #fff;
+	background-color: #333;
+	border-color: #fff;
+}
+a.main-btn:focus  {
+	color: #333;
+	background-color: #fff;
+	border-color: #333;
+}
+.bg-main-search {
+    background-color: #f9f9f9;
+    padding: 25px 0;
+}
+.bg-main-search .btn {
+    margin-bottom: 0;
+}
+.search .form-control {
+	height: 45px;
+}
+.search .btn {
+	padding: 12.5px 40px;
+}
+.form-control:focus {
+    border-color: rgb(38, 194, 129);
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(38, 194, 129, 0.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(38, 194, 129, 0.6);
+}
+/***************search results*******************/
+/*Search table*/
+
+#parts h2 {
+    margin-top: 45px;
+	font-family: "GothamProMedium";
+	color:  #333;
+	font-size: 2.563em;
+	line-height: 1.171;
+}
+#parts table {
+	width: 100%;
+	margin-top: 30px;
+	text-align: left;
+	font-size: 0.875em;
+	line-height: 1.857;
+}
+#parts table tr th,
+#parts table tr td {
+	padding-left: 20px;
+}
+#parts table tr td {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+#parts table tbody tr {
+	background-color: #fff;
+	border-bottom: 1px dashed #efefef;
+}
+#parts table thead tr {
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	background-color:  #f2f6f7;
+	height: 45px;
+	border: none;
+}
+#parts table > thead > tr > th,
+#parts table > tbody > tr > td {
+    vertical-align: middle;
+    border: none;
+}
+#parts table tr th:nth-child(5),
+#parts table tr td:nth-child(5) {
+	text-align: center;
+}
+#parts table a {
+	font-family: "GothamProRegular";
+	color: #26C281;
+	text-decoration: underline;
+}
+#parts table a:hover {
+	color: #1F9061;
+}
+/***************Pagination on the home page************************
+.main-pagination {
+	margin-bottom: 30px;
+	background-color: #fff;
+}*/
+.pagination {
+    display: inline-block;
+    padding-left: 15px;
+    margin: 12px 0 7px 0;
+    border-radius: 4px;
+}
+.pagination > li > a, .pagination > li > span, ul.refresh li a {
+    padding: 2px 8px 0 8px;
+    margin-right: 15px;
+    line-height: 1.42857143;
+    color: #7B7B7B;
+    background-color: #fff;
+    border: none;
+    font-size: 0.75em;
+}
+.pagination > .active a {
+    cursor: default;
+    background-color: #26C27F;
+    border-color: #26C27F;
+    border-radius: 2px;
+}
+.pagination > li > a:hover {
+    color: #fff;
+    background-color: #26c281;
+    border-color: #26c281;
+    border-radius: 2px;
+}
+.pagination > li:first-child a,
+.pagination > li:last-child a,
+ul.refresh li a {
+	margin-top: -2px;
+    padding: 3px 15px;
+    background-color: #fff;
+    border: 1px solid #6e6e6e;
+    border-radius: 2px;
+}
+.pagination > li:first-child a:hover {
+    color: #333;
+}
+.pagination > li:last-child a {
+	color: #26C27F;
+    border: 1px solid #26C27F;
+}
+.pagination > li:last-child a:hover {
+    color: #067D17;
+}
+/* Main section */
+#main-section {
+	flex: 1;
+}
+#main-section, #bottom-footer{
+	// background-color: #fff;
+}
+
+.block {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	height: 290px;
+	background-color: #f2f6f7;
+	color: #fff;
+}
+.block-1 {
+	padding: 60px 0 0 20px;
+	text-align: left;
+	background-color: #26c281;
+}
+.block-1 div {
+	margin-bottom: 5%;
+}
+.block-1 span {
+	display: inline-block;
+}
+.block-1 div span:first-child {
+	font-family: "GothamProBold";
+	font-size: 1.675em;
+	line-height: 1;
+}
+.block-1 div span:last-child {
+	font-family: "GothamProRegular";
+	font-size: 0.75em;
+	font-weight: 400;
+	line-height: 2;
+}
+.block-1 div:nth-child(2) span:first-child {
+	padding-top: 20px;
+    border-top: 2px solid #fff;
+}
+/* Block2 */
+.block-2 {
+	position: relative;
+	display: block;
+	background: #d5eef4 asset-url("background-block.png") no-repeat center center;
+	-webkit-background-size: cover;
+	   -moz-background-size: cover;
+	     -o-background-size: cover;
+			background-size: cover;
+	overflow: hidden;
+}
+.discount {
+	margin-top: 20%;
+	margin-bottom: 7%;
+}
+.discount span:first-child {
+	font-family: "GothamProBold";
+	font-size: 1.675em;
+	line-height: 1.8em;
+}
+/*Block 3*/
+.social {
+display: inline-block;
+width: 50%;
+height: 50%;
+}
+.social a {
+display: inline-block;
+width: 100%;
+height: 100%;
+}
+.social i {
+margin-top: 30%;
+}
+.social-fb i {
+padding: 5px 5px 0 10px;
+background-color: #fff;
+color: #3b5999;
+}
+.social-fb {
+float: left;
+background-color: #3b5999;
+}
+.social-fb:hover {
+background-color: #374E80;
+}
+.social-vk {
+float: right;
+background-color: #4c75a3;
+}
+.social-vk:hover {
+background-color: #3E6086;
+}
+.social-tw {
+float: left;
+background-color: #5ea9dd;
+}
+.social-tw:hover {
+background-color: #5497C5;
+}
+.social-g {
+float: right;
+background-color: #f58220;
+}
+.social-g:hover {
+background-color: #DA7A28;
+}
+/* footer */
+#bottom-footer {
+	margin-top: 5px;
+}
+#bottom-footer,
+#bottom-footer a {
+	font-family: "GothamProRegular";
+	color:  #333333;
+	font-size: 0.9em;
+	line-height: 2.167;
+	margin-right: 5px;
+}
+#bottom-footer .all-adress {
+	text-align: right;
+}
+#bottom-footer .social-footer a:first-child {
+	color:  #4c75a3;
+}
+#bottom-footer .social-footer a:nth-child(2) {
+	padding: 3px 3px 0 3px;
+	background-color: #3b5999;
+	color:  #fff;
+}
+#bottom-footer .social-footer a:nth-child(3) {
+	color:  #5ea9dd;
+}
+#bottom-footer .social-footer a:last-child {
+	color:  #f58220;
+}
+#bottom-footer .phone a {
+	font-family: "GothamProBold";
+}
+#bottom-footer .all-adress i {
+	padding-right: 10px;
+}
+@media screen and (max-width: 980px) {
+    #bottom-footer .social-footer {
+		text-align: right;
+	}
+}
+@media screen and (max-width: 360px) {
+    #bottom-footer .social-footer,
+    #bottom-footer .adress,
+    #bottom-footer .all-adress {
+		text-align: left;
+	}
+	#top-header .bg-img-main img {
+		display: none;
+	}
+	#top-header .bg-img-main {
+		text-align: center;
+	}
+	#cart-profile {
+		width: 110px;
+	}
+	.picter-cart img {
+		left: 37px;
+	}
+	.picter-cart #value {
+		left: 64px;
+	}
+}
+/* Page with catalog */
+.top-header,
+.top-header a {
+	color: #000;
+	font-size: 0.9em;
+}
+.bg-top-header {
+	background-color: #2765CA;
+	padding-top: 5px;
+    padding-bottom: 5px;
+}
+.top-header #logo {
+	text-align: left;
+	font-size: 1.8em;
+}
+.top-header .logo {
+	text-align: left;
+}
+.tagline {
+	line-height: 4em;
+}
+.top-header .phone a {
+	font-family: "GothamProBold";
+}
+.bg-buttom-header {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+.top-header #cart-profile {
+	width: 260px;
+	height: 44px;
+}
+.top-header #cart-profile i {
+	padding-right: 10px;
+	font-size: 1.7em;
+}
+.top-header .profile {
+    left: 0;
+}
+.top-header .picter-cart {
+	position: absolute;
+    right: 0;
+}
+.top-header .picter-cart #value {
+    bottom: 15px;
+    left: 22px;
+}
+.top-header .profile {
+    padding: 5px 10px;
+}
+.top-header .picter-cart a {
+    padding: 15px 10px 9px 10px;
+}
+.top-header .picter-cart a:hover,
+.top-header .profile:hover {
+    background-color: #F7F7F7;
+}
+@media screen and (max-width: 360px) {
+    .top-header #logo {
+		text-align: center;
+
+	}
+}
+
+.mainpage_content{
+	color: #333;
+	margin: 70px;
+}
+

@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Название:</strong>
+  <%= @category.name %>
+</p>
+<p>
+  <strong>Описание для SEO:</strong>
+  <%= @category.description %>
+</p>
+<hr>
+<%= link_to 'редактировать', edit_cp_category_path(@category) %> |
+<%= link_to 'назад', cp_categories_path %>

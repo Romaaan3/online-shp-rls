@@ -1,0 +1,32 @@
+.page-header
+	h1 Пользователи
+
+.row
+	.col-md-8
+		table.table
+		  thead
+		    tr
+		      th ID
+		      th email
+		      th тип
+		      th Дата регистрации
+
+		  tbody
+		    - @users.each do |user|
+		      tr
+		      	td = user.id
+		        - unless user.confirmed_at
+			        td.text-muted
+			        	span> =  user.email
+			        	span.label.label-default неактивирован
+		        - else
+			        td = link_to user.email, cp_user_path(user)
+	        	td = user.role.name
+	        	td = l user.created_at, format: :long
+p Всего пользователей: #{@users.count}
+hr
+- unless @unactivated_users.blank?
+	= link_to "Удалить все неактивированные аккаунты (#{@unactivated_users.count})", cp_delete_unactivated_url, method: :delete, data: { confirm: 'Вы уверены?' }, class: "btn btn-danger btn-sm"
+- else
+	= link_to "Удалить все неактивированные аккаунты", cp_delete_unactivated_url, method: :delete, data: { confirm: 'Вы уверены?' }, class: "btn btn-danger btn-sm disabled"
+

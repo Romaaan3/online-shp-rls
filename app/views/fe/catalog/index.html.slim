@@ -1,0 +1,24 @@
+.container
+  .row
+    .col-xs-12.col-sm-3.col-md-4.col-lg-3
+      = render 'layouts/left_catalog_menu'
+
+    .col-xs-12.col-sm-9.col-md-8.col-lg-9
+      .row
+        .col-xs-12.col-sm-12.col-md-12.col-lg-12
+          .contant
+            = search_form_for @q, url: fe_catalog_index_path, class: "row", html: {autocomplete: "off", class: "search"}, remote: true do |f|
+              .input-group
+                = f.search_field :name_or_brand_name_or_category_name_cont, class: "form-control", autofocus: true, placeholder: "Название запчасти"
+                span.input-group-btn
+                  = button_tag type: 'submit', class: "btn btn-search" do
+                    span.glyphicon.glyphicon-search
+
+      .row
+        #parts
+          == render 'parts_table'
+
+      .row style="margin-top: 30px"
+        .col-xs-12.col-sm-12.col-md-12.col-lg-12
+          = will_paginate @parts , class: "main-pagination"
+

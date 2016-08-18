@@ -1,0 +1,12 @@
+ru:
+  # activerecord:
+  #   state_machines:
+  #     movement: # model name
+  #       state: # state name
+  #         states:
+  #           new: 'новое'
+  #           done: 'выполненное'
+  will_paginate:
+    previous_label: "Назад"
+    next_label: "Вперед"
+    page_gap: "&hellip;"

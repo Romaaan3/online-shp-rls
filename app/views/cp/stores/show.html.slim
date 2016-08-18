@@ -1,0 +1,10 @@
+h1  = @store.name
+
+table.table
+	- @store.existences.each do |existence|
+		tr
+			td = existence.part.name
+			td = existence.q
+
+hr
+= link_to 'Назад', cp_stores_path 

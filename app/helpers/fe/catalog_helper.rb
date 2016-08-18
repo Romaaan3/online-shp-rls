@@ -1,0 +1,2 @@
+module Fe::CatalogHelper
+end

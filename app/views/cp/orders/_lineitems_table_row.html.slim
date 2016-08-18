@@ -1,0 +1,25 @@
+tr id==dom_id(lineitem)
+	td = lineitem.id
+	td = lineitem.part.brand.name
+	td = lineitem.p_name
+	td = lineitem.p_cost
+	td
+		- unless @order.complete?
+			= form_for [:cp, lineitem], remote: true, html: { class: 'form-inline' } do |f|
+				.input-group
+					- if @order.from_store.name == "Интернет-магазин"
+						= f.number_field :q, class: "form-control input-sm", min: 1
+					- else
+						= f.number_field :q, class: "form-control input-sm", min: 1, max: @order.from_store.existences.find_by_part_id(lineitem.part_id).q
+					span.input-group-btn
+						= f.submit "ok", class: "btn btn-default btn-sm", data: { disable_with: '...' }
+		- else
+			= lineitem.q
+	td id="full_cost_#{dom_id(lineitem)}"
+			| $
+			= lineitem.p_full_cost
+	td
+		- unless @order.complete?
+			= button_to cp_order_lineitem_path(lineitem), class: "btn btn-danger btn-sm",
+	    method: "delete", remote: true do
+				span.glyphicon.glyphicon-remove.small

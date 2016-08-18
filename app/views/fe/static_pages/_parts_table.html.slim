@@ -1,0 +1,19 @@
+- if parts.any?
+  table.table
+    thead
+      tr
+        th ID
+        th бренд
+        th категория
+        th название
+        th цена
+    tbody
+      - parts.each do |part|
+        tr
+          td = part.id
+          td = part.brand.name
+          td = part.category.name
+          td = link_to part.name, fe_catalog_part_path(part.brand, part.category, part)
+
+          td = part.cost_1
+  = will_paginate parts, renderer: BootstrapPagination::Rails 

@@ -1,0 +1,44 @@
+.page-header.row
+	.col-md-8.col-sm-12
+		h1 Заказы
+	.col-md-4.col-sm-12
+		= link_to 'Создать + ', new_cp_order_path, class: "btn btn-sm btn-default pull-right top_btn"
+
+
+table.table
+  thead
+    tr
+      th ID
+      th продавец
+      th клиент
+      th склад
+      th оплата
+      th сумма
+      th
+      th
+
+  tbody
+    - @orders.each do |order|
+      tr class="#{order.complete? ? "success" : ""}"
+
+        td = order.id
+        td
+          - if order.seller.email == "shop@swap.com.by"
+            span.label.label-warning интернет-магазин
+          - else
+            = order.seller.email
+        td
+        	= order.client.email if order.client
+        td = order.from_store.name
+        td class="#{order.payd? ? "success" : "danger"}"
+          = order.payd? ? "есть" : "нету"
+        td = order.full_cost
+        td = link_to 'просмотр', cp_order_path(order)
+        - unless order.complete? || order.payd?
+          td = link_to 'удалить', cp_order_path(order), data: {:confirm => 'Действие нельзя будет отменить. Вы уверены?'}, :method => :delete, class: "text-danger"
+        - else
+          td нельзя удалить
+
+br
+
+= link_to 'Создать + ', new_cp_order_path, class: "btn btn-lg btn-success"

@@ -1,0 +1,15 @@
+<% unless @order_lineitem.errors.any? %>
+	$("#lineitems_rows .active").before("<%= j render(:partial => 'cp/orders/lineitems_table_row', :locals => { lineitem: @order_lineitem } ) %>");
+	$("#full_cost_<%=dom_id(@order_lineitem.order)%>").text("$<%=@order_lineitem.order.full_cost%>");
+	
+<% else %>
+	$("#info_block").html("<%= j render(:partial => 'cp/shared/errors', :locals => { entity: @order_lineitem } ) %>");
+	$("#info_block .alert").slideToggle();
+
+	setTimeout(function(){
+		$("#info_block .alert").slideToggle("normal", function(){
+			$("this").remove();
+		});
+	}, 1500);
+	
+<% end %>

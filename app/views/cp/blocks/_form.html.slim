@@ -1,0 +1,14 @@
+= simple_form_for [:cp, @block] do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name, label: "Название"
+    = f.input :title, label: "Title", as: :text
+    = f.input :description, label: "Description", as: :text
+    = f.input :keywords, label: "Keywords", as: :text
+    = f.input :text, :input_html => { class: "tinymce" }, label: "Содержание"
+
+  .form-actions
+    = f.button :submit, "Сохранить"
+
+= tinymce :language => "ru"

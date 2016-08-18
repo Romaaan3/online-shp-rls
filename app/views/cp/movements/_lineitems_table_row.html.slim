@@ -1,0 +1,20 @@
+tr id==dom_id(lineitem)
+	td = lineitem.id
+	td = lineitem.part.brand.name
+	td = lineitem.part.category.name
+	td = lineitem.part.name
+	td
+		- unless lineitem.movement.complete? 
+			= form_for [:cp, lineitem], remote: true, html: { class: 'form-inline' } do |f|
+				.input-group
+					= f.number_field :q, class: "form-control input-sm"
+					span.input-group-btn
+						= f.submit "ok", class: "btn btn-default btn-sm", data: { disable_with: '...' }
+		- else
+			= lineitem.q
+
+	td 
+		- unless lineitem.movement.complete? 
+			= button_to cp_movement_lineitem_path(lineitem), class: "btn btn-danger btn-sm",
+	    method: "delete", remote: true do
+				span.glyphicon.glyphicon-remove.small

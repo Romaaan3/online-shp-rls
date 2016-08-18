@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @cp_lead.name
+p
+  strong Tel:
+  = @cp_lead.tel
+
+= link_to 'Edit', edit_cp_lead_path(@cp_lead)
+'|
+= link_to 'Back', cp_leads_path

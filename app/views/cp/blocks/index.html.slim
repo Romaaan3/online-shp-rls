@@ -1,0 +1,18 @@
+h1 Блоки
+hr
+table.table
+  thead
+    tr
+      th ID
+      th название
+
+  tbody
+    - @blocks.each do |block|
+      tr
+        td = block.id
+        td = link_to block.name, edit_cp_block_path(block)
+        / td = link_to 'редактировать', edit_cp_block_path(block)
+        / td = link_to 'удалить', cp_block_path(block), data: {:confirm => 'Вы уверены?'}, :method => :delete, class: "text-danger"
+/br
+
+/= link_to 'Создать', new_cp_block_path, class: "btn btn-default"

@@ -1,0 +1,14 @@
+= simple_form_for [:cp, @news] do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name, label: "Название"
+    = f.input :anons, label: "Анонс"
+    = f.input :image, label: "Обложка"
+  	= image_tag @news.image.url(:thumb), class: "img-rounded"
+    = f.input :text, :input_html => { class: "tinymce" }, label: "Содержание"
+
+  .form-actions
+    = f.button :submit, "Сохранить"
+
+= tinymce :language => "ru"

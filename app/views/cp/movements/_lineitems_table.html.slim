@@ -1,0 +1,13 @@
+table.table
+	thead
+		tr
+			th width="15%" ID строки
+			th бренд
+			th категория
+			th запчасть
+			th width="110px" шт
+			th width="5%" 
+	tbody#lineitems_rows
+		- lineitems.each do |lineitem|
+			= render partial: 'lineitems_table_row', locals: { lineitem: lineitem }
+

@@ -1,0 +1,27 @@
+#get_lead.modal.fade aria-labelledby="get_lead_label" role="dialog" tabindex="-1"
+  .modal-dialog role="document"
+    .modal-content
+      .modal-header
+        button.close aria-label="Close" data-dismiss="modal" type="button"
+          span aria-hidden="true"  &times;
+
+        h4#get_lead_label.modal-title Заказать звонок
+      .modal-body
+        .row
+          .col-lg-12
+            = form_for [:fe, Lead.new], html: { class: "form-inline" }, remote: true do |f|
+              .row
+              .form-group
+                = f.label :name, "Имя"
+                = f.text_field :name, placeholder: "Василий", class: "form-control", required: true
+              .row
+                .form-group
+                  = f.label :tel, "Телефон"
+                  = f.text_field :tel, placeholder: "+375 29 123 45 67", class: "form-control", required: true, data: { mask: "+375 (99) 999-99-99" }
+              .row
+                .form-group style="margin-bottom:0"
+                  = f.submit "отправить", class: "btn btn-success col-xs-12", style: "margin-bottom:0"
+
+            p#modal_msg.text-success style="margin-top: 20px;" Заявка принята, мы Вам перезвоним.
+      .modal-footer
+        p.small.text-muted Оставьте свои контактные данные и мы Вам перезвоним.

@@ -1,0 +1,20 @@
+= simple_form_for [:cp, @part], html: { class: 'form-horizontal', :multipart => true } do |f|
+  = f.input :name, label: 'Название запчасти', error: 'Название не должно быть пустым'
+  = f.association :brand, label: "Бренд", error: 'Веберите Бренд'
+  = f.association :category, label: "Категория", error: 'Выберите Категорию'
+  = f.input :description, label: 'Описание', hint: 'Своими словами пару предложений о запчасти.'
+  = f.input :cost_1, label: "Цена продажи", input_html: { min: 0 }
+  = f.input :cost_2, label: "Цена закупки", input_html: { min: 0 }
+
+  = file_field_tag "files[]", type: :file, multiple: true
+  
+  = f.button :submit
+
+-unless @part.pictures.blank?
+  hr
+  h5 изображения
+  - @part.pictures.each do |pic|
+    = link_to cp_picture_path(pic.id), method: :delete, remote:true, class: "link_remove_picture", id: "picture_#{pic.id}" do
+      span.picture_remove_text удалить
+      = image_tag pic.file.url(:thumb), class: "img-rounded"
+  hr

@@ -1,0 +1,14 @@
+table.table
+  thead
+    tr
+      th ID
+      th бренд
+      th категория
+      th название
+      th width="120px"
+        | наличие
+        = @movement.from_store ? " (#{@movement.from_store.name})" : " (всего)"
+      th width="150px"
+  tbody
+    - @parts.each do |part|
+      = render 'parts_table_row', part: part

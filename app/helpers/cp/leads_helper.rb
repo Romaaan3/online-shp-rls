@@ -1,0 +1,2 @@
+module Cp::LeadsHelper
+end

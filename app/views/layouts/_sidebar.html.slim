@@ -1,0 +1,51 @@
+ul.nav.nav-sidebar
+  li
+    =link_to cp_orders_path do
+      | заказы
+      i.fa.fa-credit-card.pull-right
+      - if new_orders_count > 0
+        span.badge< =new_orders_count
+  li
+    = link_to cp_parts_path do
+      | запчасти
+      i.fa.fa-puzzle-piece.pull-right
+  li
+    = link_to cp_movements_path do
+      | перемещения
+      i.fa.fa-exchange.pull-right
+  - if current_user.root?
+    hr
+    li = link_to cp_categories_path do
+      | категории
+      i.fa.fa-list.pull-right
+
+    li = link_to cp_brands_path do
+      | бренды
+      i.fa.fa-list.pull-right
+
+    li = link_to cp_stores_path do
+      | склады
+      i.fa.fa-sitemap.pull-right
+    li
+      = link_to cp_users_path do
+        | пользователи
+        i.fa.fa-user.pull-right
+
+    hr
+    li 
+      = link_to cp_emails_path do
+        |  emails
+        i.fa.fa-envelope.pull-right
+    li 
+      = link_to cp_leads_path do
+        |  лиды
+        i.fa.fa-phone.pull-right
+    hr
+    li 
+      = link_to cp_news_index_path do
+        |  новости
+        i.fa.fa-newspaper-o.pull-right
+    li 
+      = link_to cp_blocks_path do
+        |  блоки
+        i.fa.fa-sticky-note-o.pull-right

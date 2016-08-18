@@ -1,0 +1,25 @@
+doctype html
+html lang="ru" 
+  head
+    meta charset="utf-8"
+    meta content="IE=edge" http-equiv="X-UA-Compatible"
+    meta content="width=device-width, initial-scale=1" name="viewport"
+    meta content="INTELLECT-IT Minsk www.intellectit.by" name="author"
+    meta content="noindex, nofollow" name="robots"
+    title SWAP.com.by: Авторизация на сайте.
+
+    = stylesheet_link_tag    "auth", media: 'all', 'data-turbolinks-track' => true
+
+    /![if lt IE 9]><script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script><![endif]
+    /![if lt IE 9]><script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script><![endif]
+
+    = csrf_meta_tags
+    = action_cable_meta_tag
+
+  body
+    .bg_page_form
+        .my_form_block
+            = yield
+      
+/ a> href="/" SWAP.com.by
+/   | - онлайн сервис по продаже запчастей для мобильных устройств. Минск, #{Time.now.year}.

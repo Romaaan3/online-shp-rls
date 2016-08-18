@@ -1,0 +1,12 @@
+- unless @last_news.blank?
+	- @last_news.each do |one|
+		.col-xs-12.col-sm-6.col-md-6.col-lg-6
+		  article
+		    .block-news
+		      span.news-date = l one.created_at, format: :long
+		      p
+		      	= link_to fe_news_path(one) do
+		      		span style="display:inline-block" =one.name
+		      		span = one.anons
+- else 
+	p Ни одной новости не опубликовано.

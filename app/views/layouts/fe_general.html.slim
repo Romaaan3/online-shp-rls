@@ -1,0 +1,172 @@
+doctype html
+html lang="ru"
+  head
+    meta charset="utf-8"
+    - if @block_1
+      title = show_title(@block_1)
+      meta content=show_description(@block_1) name="description"
+    - else
+      title = @title
+      - unless @description.blank?
+        meta content==@description name="description"
+    meta content="IE=edge" http-equiv="X-UA-Compatible"
+    meta content="width=device-width, initial-scale=1" name="viewport"
+    meta content="INTELLECT-IT Minsk www.intellectit.by" name="author"
+    - if params[:controller] != "fe/carts" && params[:action] != "profile"
+      meta name="robots" content="index, follow"
+    - else
+      meta name="robots" content="noindex, nofollow"
+
+
+
+    = stylesheet_link_tag    "front_end", media: 'all', 'data-turbolinks-track' => true
+
+    /![if lt IE 9]><script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script><![endif]
+    /![if lt IE 9]><script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script><![endif]
+    = javascript_include_tag "front_end", 'data-turbolinks-track' => true
+    = csrf_meta_tags
+    = action_cable_meta_tag
+
+  body
+    header.top-header
+      #info_block
+        -if notice
+          .alert.alert-info
+            = notice
+            button.close type="button" data-dismiss="alert" aria-label="Close"
+              span aria-hidden="true" &times;
+        -if alert
+          .alert.alert-warning
+            = alert
+            button.close type="button" data-dismiss="alert" aria-label="Close"
+              span aria-hidden="true" &times;
+
+      .bg-top-header
+        .container
+          .row
+            .col-xs-12.col-sm-12.col-md-12.col-lg-12
+              nav#top-nav.navbar.navbar-default
+                .navbar-header
+                  button.navbar-toggle.collapsed aria-expanded="false" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button"
+                    span.sr-only Toggle navigation
+                    span.icon-bar
+                    span.icon-bar
+                    span.icon-bar
+                #bs-example-navbar-collapse-1.collapse.navbar-collapse
+                  ul.nav.navbar-nav
+                    li
+                      = link_to fe_root_url do
+                        | Главная
+                        span.sr-only (current)
+                    li
+                      = link_to "Доставка и оплата", fe_dip_url
+                    li
+                      = link_to "Новости", fe_news_index_url
+                    li
+                      a href="/kontakty"  Контакты
+                  ul.nav.navbar-nav.navbar-right
+                    - if user_signed_in?
+                     li =link_to "выйти", destroy_user_session_path, :method => :delete, class: "pull-right"
+                    -else
+                      li =link_to "зарегистрироваться", new_user_registration_path, class: "pull-right"
+                      li =link_to "войти", new_user_session_path, class: "pull-right"
+                    li
+                      button.main-discount  data-target="#get_lead" data-toggle="modal" type="button" Заказать звонок
+                      == render "layouts/zayavka_modal"
+
+
+      .bg-buttom-header
+        .container
+          .row
+            .col-xs-12.col-sm-3.col-md-3.col-lg-2
+              .logo
+                = link_to "SWAP", fe_catalog_index_path, id: "logo", title: "Запчасти для мобильных устройств"
+            .col-xs-12.col-sm-6.col-md-3.col-lg-4
+              .tagline
+                span Запчасти для мобильных устройств и планшетов
+            .col-xs-12.col-sm-3.col-md-3.col-lg-3
+              .phone
+                a href="tel:+375291889991"
+                  span +375 (29) 188-99-91
+                br
+                a href="tel:+375291121111"
+                  span +375 (29) 112-11-11
+                br
+                a href="tel:+375447112111"
+                  span +375 (44) 711-21-11
+            .col-xs-12.col-sm-12.col-md-3.col-lg-3
+              #cart-profile.right-block
+                = render @cart
+    section
+      .main-section
+        .container
+          .row
+            .col-xs-12.col-sm-12.col-md-12.col-lg-12
+              ol.breadcrumb
+                = render_breadcrumbs :tag => :li, :separator => ""
+  			= yield
+    footer
+      .footer-top
+        .container
+          .row
+            .col-xs-12.col-sm-6.col-md-3.col-lg-3
+              h2 О сервисе
+              p
+                | SWAP.com.by - онлайн сервис по продаже запчастей для мобильных устройств и планшетов.
+            .col-xs-12.col-sm-6.col-md-3.col-lg-3
+              .about-com
+                h2 О компании
+                p
+                  | ИП Шипко АА
+                  br
+                  | УНП 190558760
+                  br
+                  | Минск, ул. Волгоградская, 17-13
+                  br
+                  | email: shipaalex@tut.by
+              .footer-payment
+                h2 Способы оплаты
+
+                img style="max-width: 100%" src="#{asset_path('cards.png')}"
+            .col-xs-12.col-sm-12.col-md-6.col-lg-6
+              .row
+                .col-xs-12.col-sm-12.col-md-12.col-lg-12
+                  h2 Последние новости
+                  == render 'layouts/last_news'
+      .bottom-footer
+        .container
+          .row
+            .col-xs-12.col-sm-5.col-md-3.col-lg-3
+              .text-left
+                span © SWAP.com.by Минск, #{Time.now.year}.
+            .col-xs-4.col-sm-3.col-md-2.col-lg-2
+              .social-footer
+                a href="https://vk.com/intellectit" title=("Мы ВКонтакте")
+                  i.fa.fa-vk
+                a href="https://www.facebook.com/intellectit.minsk" title=("Мы на facebook.com")
+                  i.fa.fa-facebook
+                a href="https://twitter.com/IIT_Minsk" title=("Мы в твиттере")
+                  i.fa.fa-twitter
+                a href="https://plus.google.com/+IntellectitBySS/posts" title=("Мы в Google Plus")
+                  i.fa.fa-google-plus
+            .col-xs-8.col-sm-4.col-md-2.col-lg-2
+              .phone.text-right
+                a href="tel:+375291889991" title="Позвонить"
+                  span +375 (29) 188-99-91
+            .col-xs-12.col-sm-4.col-md-3.col-lg-3
+              .adress
+                a href="/kontakty" title="Посмотреть на карте"
+                  span Минск, Волгоградская 17
+            .col-xs-12.col-sm-4.col-md-2.col-lg-2
+              .all-adress
+                span
+                  a href="https://www.intellectit.by" title="Веб-приложения для бизнеса"
+                    span style="font-size: 0.7em;" Разработчик: INTELLECT-IT
+
+
+
+
+
+
+/ a> href="/" SWAP.com.by
+/   | - онлайн сервис по продаже запчастей для мобильных устройств. Минск, #{Time.now.year}.

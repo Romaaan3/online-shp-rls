@@ -1,0 +1,3 @@
+$("#<%=dom_id(@order_lineitem)%>").remove();
+$("#full_cost_<%=dom_id(@order_lineitem.order)%>").text("$<%=@order_lineitem.order.full_cost%>");
+// alert("#<%=dom_id(@order_lineitem)%>");

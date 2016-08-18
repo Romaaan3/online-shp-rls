@@ -1,0 +1,23 @@
+<% unless @order_lineitem.errors.any? %>
+	$("#full_cost_<%=dom_id(@order_lineitem)%>").text("$<%=@order_lineitem.p_full_cost%>");
+	$("#full_cost_<%=dom_id(@order_lineitem.order)%>").text("$<%=@order_lineitem.order.full_cost%>");
+	// $("#info_block").html("<div style=\"display:none;\"class=\"alert alert-success\">количество обновлено</div>");
+	// $("#info_block .alert").slideToggle();
+	// setTimeout(function(){
+	// 	$("#info_block .alert").slideToggle();
+	// }, 1500);
+	// setTimeout(function(){
+	// 	$("#info_block .alert").remove();
+	// }, 2200);
+<% else %>
+	$("#info_block").html("<%= j render(:partial => 'cp/shared/errors', :locals => { entity: @order_lineitem } ) %>");
+	$("#info_block .alert").slideToggle();
+
+	// setTimeout(function(){
+	// 	$("#info_block .alert").slideToggle();
+	// }, 1500);
+	// setTimeout(function(){
+	// 	$("#info_block .alert").remove();
+	// }, 2200);
+	
+<% end %>

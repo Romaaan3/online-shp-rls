@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Part:
+  = @fe_cart_line_item.part
+p
+  strong Cart:
+  = @fe_cart_line_item.cart
+p
+  strong Q:
+  = @fe_cart_line_item.q
+
+= link_to 'Edit', edit_fe_cart_line_item_path(@fe_cart_line_item)
+'|
+= link_to 'Back', fe_cart_line_items_path

@@ -1,0 +1,22 @@
+table.table
+	thead
+		tr
+			th width="15%" ID строки
+			th бренд
+			th название
+			th width="50px" цена
+			th width="110px" шт
+			th width="80px" сумма
+			th width="5%" 
+	tbody#lineitems_rows
+		- lineitems.each do |lineitem|
+			= render partial: 'lineitems_table_row', locals: { lineitem: lineitem }
+		tr.active
+			td colspan="3"
+			td 
+			td 
+				strong Итого
+			td 
+				strong id="full_cost_#{dom_id(@order)}"
+					| $#{@order.full_cost}
+			td 

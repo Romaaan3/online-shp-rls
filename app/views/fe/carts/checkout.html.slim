@@ -1,0 +1,162 @@
+  .container
+    .row
+      .col-xs-12.col-sm-12.col-md-12.col-lg-12
+        ul.cart-menu
+          li
+            = link_to "Товары в корзине", fe_current_cart_url
+          li.active
+            | Оформление заказа
+    .row
+      .col-xs-12.col-sm-12.col-md-12.col-lg-12
+          .row
+            .col-xs-12.col-sm-12.col-md-12.col-lg-12
+              .block.block-1
+                span вы заказываете:
+                span
+                  span
+                    = "#{@cart.total_quantity} #{Russian.p(@cart.total_quantity, "товар", "товара", "товаров")}"
+
+                span на сумму:
+                span.total-price
+                  span = number_to_currency(@cart.total_price*@rate.rate_of_exchange, precision: 0)
+              - if @order.errors.any?
+                  #error_explanation
+                    ul
+                    - @order.errors.full_messages.each do |msg|
+                      li= msg
+              .caption-form
+                span 1
+                span способ доставки
+              = simple_form_for [:fe, @order] do |f|
+                .block.block-2
+                  .row
+                    .col-xs-12.col-sm-4.col-md-4.col-lg-4
+                      /input#delivery1 name="delivery" type="radio" /
+                      = f.radio_button :tip_dostavki, "samovyvoz", :required => true
+                      label.delivery for="order_tip_dostavki_samovyvoz"
+                        span Самовывоз
+                        br/
+                        span В день покупки
+                    .col-xs-12.col-sm-4.col-md-4.col-lg-4
+                      /input#delivery2 name="delivery" type="radio" /
+                      = f.radio_button :tip_dostavki, "kurier", :required => true
+                      label.delivery for="order_tip_dostavki_kurier"
+                        span Доставка курьером
+                        br/
+                        span 1-3 дня
+                    .col-xs-12.col-sm-4.col-md-4.col-lg-4
+                      /input#delivery3 name="delivery" type="radio" /
+                      = f.radio_button :tip_dostavki, "pochta", :required => true
+                      label.delivery for="order_tip_dostavki_pochta"
+                        span Почта беларуси
+                        br/
+                        span 3-7 дней
+                .caption-form
+                  span 2
+                  span личные данные и адрес доставки
+                .block.block-3
+                  .personal-date
+                    .row
+                      .col-xs-12.col-sm-4.col-md-4.col-lg-4
+                        label for="surname"
+                          span Фамилия *
+                        br/
+                        /input#surname name="surname" placeholder="Иванов" required="" type="text"
+                        = f.input :familija, placeholder: 'Иванов', label: false, input_html: { id: 'surname' }
+                      .col-xs-12.col-sm-4.col-md-4.col-lg-4
+                        label for="name"
+                          span Имя *
+                        br/
+                        /input#name name="name" placeholder="Иван" required="" type="text" /
+                        = f.input :name, placeholder: 'Иван', label: false, input_html: { id: 'name' }
+                      .col-xs-12.col-sm-4.col-md-4.col-lg-4
+                        label for="patronymic"
+                          span Отчество *
+                        br/
+                        /input#patronymic name="patronymic" placeholder="Иванович" required="" type="text" /
+                        = f.input :otchestvo, placeholder: 'Иванович', label: false, input_html: { id: 'patronymic' }
+
+                      .col-xs-12.col-sm-4.col-md-4.col-lg-4
+                        label for="phone"
+                          span Телефон *
+                        br/
+                        /input#phone name="phone" placeholder=("+375 (33) 789-88-77") required="" type="text" /
+                        = f.input :mobile, placeholder: '+375 (33) 789-88-77', label: false, input_html: { id: 'phone', data: { mask: '+375 (99) 999-99-99' } }, required: true
+                      .col-xs-12.col-sm-4.col-md-8.col-lg-4
+                        label for="mail"
+                          span E-mail:
+                        br/
+                        /input#mail name="mail" placeholder="qwwqe@gamil.com" type="text" /
+                        = f.input :email, placeholder: 'your_email@gamil.com', label: false, input_html: { id: 'mail', :pattern => '[^@]+@[^@]+\.[a-zA-Z]{2,6}' }, :required => true
+                  .row
+                    .col-xs-12.col-sm-4.col-md-4.col-lg-4
+                      label for="town"
+                        span Город *
+                      br/
+                      /input#town name="town" placeholder="Брест" required="" type="text" /
+                      = f.input :gorod, placeholder: 'Брест', label: false, input_html: { id: 'town' }
+                    .col-xs-12.col-sm-4.col-md-4.col-lg-4
+                      label for="street"
+                        span Улица *
+                      br/
+                      /input#street name="street" placeholder="Пушкина" required="" type="text" /
+                      = f.input :ulica, placeholder: 'Пушкина', label: false, input_html: { id: 'street' }
+                    .col-xs-12.col-sm-4.col-md-4.col-lg-4
+                      label for="house"
+                        span Дом *
+                      br/
+                      /input#house name="house" placeholder="23" required="" type="text" /
+                      = f.input :dom, placeholder: '23', label: false, input_html: { id: 'house' }
+                    .col-xs-12.col-sm-4.col-md-4.col-lg-4
+                      label for="housing"
+                        span Корпус
+                      br/
+                      /input#housing name="housing" placeholder="3" type="text" /
+                      = f.input :korpus, placeholder: '3', label: false, input_html: { id: 'housing', min: 0}
+                    .col-xs-12.col-sm-4.col-md-8.col-lg-4
+                      label for="apartment"
+                        span Квартира
+                      br/
+                      /input#apartment name="apartment" placeholder="47" type="text" /
+                      = f.input :kv, placeholder: '47', label: false, input_html: { id: 'apartment', min: 0}
+                    .col-xs-12.col-sm-4.col-md-8.col-lg-4
+                      label for="index"
+                        span Индекс
+                      br/
+                      /input#index name="index" placeholder="224789" type="text" /
+                      = f.input :postal_index, placeholder: '224789', label: false, input_html: { id: 'index' }
+                .caption-form
+                  span 3
+                  span способ оплаты
+                .block.block-4
+                  .row
+                    .col-xs-12.col-sm-4.col-md-4.col-lg-4
+                      /input#payment1 name="payment" type="radio" /
+                      = f.radio_button :tip_oplaty, "karta", :required => true
+
+                      label.payment for="order_tip_oplaty_karta"
+                        span Банковской картой
+                        br/
+                        span Visa, Mastercard
+                    .col-xs-12.col-sm-4.col-md-4.col-lg-4
+                      /input#payment2 name="payment" type="radio" /
+                      = f.radio_button :tip_oplaty, "nalicnie", :required => true
+                      label.payment for="order_tip_oplaty_nalicnie"
+                        span Наличные
+                        br/
+                        span При получении
+                .block.block-4
+                  .row
+                    .col-xs-12.col-sm-6.col-md-8.col-lg-8
+                      label.comment for="comment"
+                        span Комментарий к заказу:
+                      br/
+                      /textarea#comment name="comment" placeholder=("Здесь вы можете написать свои пожелания. Например часы доставки.")
+                      = f.input :comment, label: false, placeholder: "Здесь вы можете написать свои пожелания. Например часы доставки.", input_html: { id: 'comment' }
+
+                    .col-xs-12.col-sm-6.col-md-4.col-lg-4
+                      button.order
+                      / a.btn.center-block href=""  Оформить заказ
+
+
+                      = f.submit "Оформить заказ", class: "btn center-block"

@@ -1,0 +1,19 @@
+- unless @cart.cart_line_items.empty?
+	tr
+	  th
+	    span товары
+	  th Цена
+	  th Количество
+	  th Стоимость
+	  th
+	- @cart.cart_line_items.order(:part_id).each do |line_item|
+	  ==render 'fe/carts/one_line_item', line_item: line_item
+-else
+	.well 
+		p Корзина товаров пуста
+		p = link_to "Перейти в каталог товаров", fe_catalog_index_path
+
+
+
+
+
